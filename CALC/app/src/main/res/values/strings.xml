@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CALC</string>
+    <string name="Calculator">Calculator</string>
+    <string name="hint">Enter Expression</string>
+    <string name="cancal">Cancel</string>
+    <string name="backspace">Backspace</string>
+</resources>
