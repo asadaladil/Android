@@ -115,25 +115,21 @@
             android:layout_height="wrap_content"
             android:text="6"
             android:textSize="25sp"
-            android:layout_margin="5dp">
-        </Button>
+            android:layout_margin="5dp"/>
         <Button
             android:id="@+id/bt7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="7"
             android:textSize="25sp"
-            android:layout_margin="5dp">
-
-        </Button>
+            android:layout_margin="5dp"/>
         <Button
             android:id="@+id/bt8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="8"
             android:textSize="25sp"
-            android:layout_margin="5dp">
-        </Button>
+            android:layout_margin="5dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -145,32 +141,28 @@
             android:layout_height="wrap_content"
             android:text="9"
             android:textSize="25sp"
-            android:layout_margin="5dp">
-        </Button>
+            android:layout_margin="5dp"/>
         <Button
             android:id="@+id/bt0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
             android:textSize="25sp"
-            android:layout_margin="5dp">
-        </Button>
+            android:layout_margin="5dp"/>
         <Button
             android:id="@+id/bt10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="("
             android:textSize="25sp"
-            android:layout_margin="5dp">
-        </Button>
+            android:layout_margin="5dp"/>
         <Button
             android:id="@+id/bt11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=")"
             android:textSize="25sp"
-            android:layout_margin="5dp">
-        </Button>
+            android:layout_margin="5dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -182,33 +174,28 @@
             android:layout_height="wrap_content"
             android:text="/"
             android:textSize="25sp"
-            android:layout_margin="5dp">
-        </Button>
+            android:layout_margin="5dp"/>
         <Button
             android:id="@+id/bt_mul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="*"
             android:textSize="25sp"
-            android:layout_margin="5dp">
-
-        </Button>
+            android:layout_margin="5dp"/>
         <Button
             android:id="@+id/bt_plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+"
             android:textSize="25sp"
-            android:layout_margin="5dp">
-        </Button>
+            android:layout_margin="5dp"/>
         <Button
             android:id="@+id/bt_minus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="-"
             android:textSize="25sp"
-            android:layout_margin="5dp">
-        </Button>
+            android:layout_margin="5dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -220,52 +207,57 @@
             android:layout_height="wrap_content"
             android:text="."
             android:textSize="25sp"
-            android:layout_margin="5dp">
-        </Button>
+            android:layout_margin="5dp"/>
         <Button
             android:id="@+id/bt_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/backspace"
             android:textSize="20sp"
-            android:layout_margin="5dp">
-        </Button>
+            android:layout_margin="5dp"/>
         <Button
             android:id="@+id/bt_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cancal"
+            android:text="@string/cancel"
             android:textSize="20sp"
-            android:layout_margin="5dp">
-        </Button>
+            android:layout_margin="5dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
         <Button
+            android:id="@+id/bt_ans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ans"
+            android:textSize="21sp"
+            android:layout_margin="5dp"/>
+        <Button
             android:id="@+id/bt_mod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="mod"
-            android:textSize="25sp"
-            android:layout_margin="5dp">
-        </Button>
+            android:textSize="21sp"
+            android:layout_margin="5dp"/>
         <Button
             android:id="@+id/bt_expo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Exp."
-            android:textSize="25sp"
-            android:layout_margin="5dp">
-        </Button>
+            android:textSize="21sp"
+            android:layout_margin="5dp"
+            />
         <Button
             android:id="@+id/bt_equal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="="
             android:textSize="25sp"
-            android:layout_margin="5dp">
-        </Button>
+            android:layout_margin="5dp"
+            
+            />
     </LinearLayout>
+
 </LinearLayout>

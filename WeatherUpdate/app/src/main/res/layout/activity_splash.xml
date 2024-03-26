@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/ocean"
+    tools:context=".SplashActivity">
+
+    <ImageView
+        android:layout_width="268dp"
+        android:layout_height="162dp"
+        android:layout_gravity="center"
+        android:src="@drawable/cloudy2"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/info"
+        android:textColor="@color/DarkGreen"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/info2"
+        android:textColor="@color/DarkGreen"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/info3"
+        android:textColor="@color/DarkGreen"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        />
+
+    <TextView
+        android:id="@+id/load"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/load"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:typeface="serif"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="250sp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/design"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/name"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        />
+</LinearLayout>

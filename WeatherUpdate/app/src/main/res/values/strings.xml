@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Weather Update</string>
+    <string name="info">Update Your Plan With</string>
+    <string name="info2">Weather</string>
+    <string name="info3">🙂</string>
+    <string name="load">Loading-0%</string>
+    <string name="design">By</string>
+    <string name="name">Md.Asad-Al-Adil</string>
+    <string name="search">🔎 Search For A City</string>
+    <string name="map">🌐</string>
+    <string name="hum">🌡</string>
+    <string name="air">🌬</string>
+    <string name="rain">☔️</string>
+    <string name="sunrise">🌄</string>
+    <string name="sunset">🌅</string>
+    <string name="press">💨</string>
+</resources>

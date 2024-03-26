@@ -13,9 +13,9 @@ import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-
-    private Button[] bt= new Button[22];
+    private Button[] bt= new Button[23];
     private TextView Exp,Result;
+    private String ans="";
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bt[19]=(Button) findViewById(R.id.bt_dot);
         bt[20]=(Button) findViewById(R.id.bt_mod);
         bt[21]=(Button) findViewById(R.id.bt_expo);
+        bt[22]=(Button)findViewById(R.id.bt_ans);
         bt[0].setOnClickListener(this);
         bt[1].setOnClickListener(this);
         bt[2].setOnClickListener(this);
@@ -65,26 +66,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bt[19].setOnClickListener(this);
         bt[20].setOnClickListener(this);
         bt[21].setOnClickListener(this);
+        bt[22].setOnClickListener(this);
         Exp=(TextView) findViewById(R.id.values);
         Result=(TextView) findViewById(R.id.result);
     }
     private int prec(char k)
     {
-        if(k=='+'||k=='-')
+        if(k=='+')
         {
             return 0;
         }
-        else if (k=='*'||k=='/'||k=='%')
-        {
-            return 1;
-        }
-        else if(k=='^')
+        else if(k=='-')
         {
             return 2;
         }
+        else if(k=='%')
+        {
+            return 1;
+        }
+        else if (k=='*'||k=='/')
+        {
+            return 3;
+        }
+        else if(k=='^')
+        {
+            return 4;
+        }
         return -2;
     }
-    private Double math(char k,Double d1,Double d2)
+    private double math(char k,Double d1,Double d2)
     {
         if (k== '+') {
             return (d2 + d1);
@@ -110,7 +120,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 Toast.makeText(MainActivity.this,"Invalid Argument",Toast.LENGTH_SHORT).show();
             }
-            else return d2%d1;
+            else
+            {
+                if((d2%d1)<0)
+                {
+                    return (d2%d1)+d1;
+                }
+                return d2%d1;
+            }
         }
         else if (k=='^')
         {
@@ -118,26 +135,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 Toast.makeText(MainActivity.this,"Invalid Argument",Toast.LENGTH_SHORT).show();
             }
-            else{
-            Double x=1.0;
-            for(int i=1;i<=d1;i++)
+            else
             {
-                x*=d2;
+                return Math.pow(d2,d1);
             }
-            return x;}
         }
         return 0.0;
     }
     private String Calculate(String St)
     {
-        String r = "",s="(0"+St+')';
-        s=s.replace("(-","(0-");
-        s=s.replace("--","+");
-        s=s.replace("+-","-");
-        s=s.replace("-+","-");
+        String r = "",s='('+St+')';
+        for(int i=1;i<=100;i++)
+        {
+            s=s.replace("*+","*");
+            s=s.replace("/+","/");
+            s=s.replace("(-","(0-");
+            s=s.replace("(+","(0+");
+            s=s.replace("+-","-");
+            s=s.replace("-+","-");
+            s=s.replace("++","+");
+            s=s.replace("--","+");
+        }
         Stack<Character> st = new Stack<>();
         Stack<Double> std = new Stack<>();
         Double d1=0.0,d2=0.0;
+        boolean ff=false;
         for (int i = 0; i < s.length(); i++) {
             char k = s.charAt(i);
             if (k >= '0' && k <= '9' || k == '.')
@@ -149,7 +171,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (r.length() != 0)
                 {
                     Double d = Double.parseDouble(r);
-                    std.push(d);
+                    if (ff){
+                    std.push(-d);ff=false;}
+                    else{std.push(d);}
                     r = "";
                 }
                 if (k == '(' || st.empty() || prec(st.peek()) <= prec(k) && k != ')') {
@@ -172,6 +196,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     st.pop();
 
                 } else if (prec(st.peek()) > prec(k)) {
+                    if(k=='-'&&(s.charAt(i-1)=='*'||s.charAt(i-1)=='/'||s.charAt(i-1)=='^'))
+                    {
+                        ff=true;
+                        continue;
+                    }
                     while (!st.empty() && prec(st.peek()) > prec(k)) {
                         try{
                         d1 = std.peek();
@@ -286,7 +315,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if(v.getId()==R.id.bt_equal)
         {
             String r=(String) Exp.getText();
-            Result.setText(Calculate(r));
+            if(r.length()==0)
+            {
+                Toast.makeText(MainActivity.this,"No Argument",Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Result.setText(Calculate(r));
+                ans=(String)Result.getText();
+            }
         }
         else if(v.getId()==R.id.bt_back)
         {
@@ -294,6 +330,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 String r=(String) Exp.getText(),rr=r.substring(0,r.length()-1);
                 Exp.setText(rr);
+                if (rr.length()==0)
+                {
+                    Result.setText("");
+                }
+
             }
             catch (Exception e)
             {
@@ -314,6 +355,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             String r=(String) Exp.getText(),rr=r+'^';
             Exp.setText(rr);
+        }
+        else if(v.getId()==R.id.bt_ans)
+        {
+            Exp.setText(ans);
         }
     }
 }

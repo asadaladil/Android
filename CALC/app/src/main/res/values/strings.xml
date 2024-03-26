@@ -2,6 +2,8 @@
     <string name="app_name">CALC</string>
     <string name="Calculator">Calculator</string>
     <string name="hint">Enter Expression</string>
-    <string name="cancal">Cancel</string>
+    <string name="cancel">Cancel</string>
     <string name="backspace">Backspace</string>
+    <string name="welcome">Welcome\n\t\t\t\t\tto\n\t\tCALC</string>
+    <string name="adil">By Md.Asad-Al-Adil</string>
 </resources>
