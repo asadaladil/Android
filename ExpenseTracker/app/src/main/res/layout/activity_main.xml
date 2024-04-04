@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="20dp"
         >
 
@@ -85,7 +85,7 @@
             >
 
             <TextView
-                android:text="Total Balance: "
+                android:text="Total Income: "
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginRight="20dp"

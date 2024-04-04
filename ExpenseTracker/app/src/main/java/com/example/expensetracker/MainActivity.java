@@ -15,6 +15,8 @@ import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -423,5 +425,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         Volley.newRequestQueue(getApplicationContext()).add(request);
+    }
+
+    public String ki_mas_eta()
+    {
+        LocalDateTime local=LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM");
+        String k=local.format(formatter);
+        return k;
     }
 }
