@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Expense Tracker</string>
+    <string name="info">EXPEND</string>
+    <string name="info2">What You Need</string>
+    <string name="info3">What You Feel Better</string>
+    <string name="load">Loading- </string>
+    <string name="design">Design By</string>
+    <string name="name">Md. Asad-Al-Adil</string>
+</resources>

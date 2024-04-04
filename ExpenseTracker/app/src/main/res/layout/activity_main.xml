@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/main_back"
+    tools:context=".MainActivity">
+    <TextView
+        android:id="@+id/user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welome "
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:textColor="@color/perms_dangerous_grp_color"
+        android:layout_marginTop="30dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Current Balance"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:textColor="@color/perms_dangerous_grp_color"
+        android:layout_marginTop="5dp"
+         />
+    <TextView
+        android:id="@+id/money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:textColor="@color/holo_green_dark"
+        android:text="0 ৳"
+        android:textSize="40sp"
+        android:typeface="serif"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="110dp"
+        android:layout_marginBottom="20dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expenditure since: "
+            android:textSize="20sp"
+            android:textColor="@color/holo_blue_dark"
+            android:layout_gravity="center"
+
+            />
+        <TextView
+            android:id="@+id/yearr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="20sp"
+            android:textColor="@color/holo_blue_dark"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+
+            />
+
+    </LinearLayout>
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        >
+        <TableRow
+            android:layout_gravity="center"
+            android:padding="2dp"
+            >
+
+            <TextView
+                android:text="Total Balance: "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/black"
+
+
+                />
+            <TextView
+                android:id="@+id/total"
+                android:text="0 ৳"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/black"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_gravity="center"
+            android:padding="2dp"
+            >
+
+            <TextView
+                android:text="Total Cost: "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/link_text_holo_dark"
+
+
+                />
+            <TextView
+                android:id="@+id/cost"
+                android:text="0 ৳"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/link_text_holo_dark"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_gravity="center"
+            android:padding="2dp"
+            >
+
+            <TextView
+                android:text="Cost Percentages: "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/holo_red_light"
+
+
+                />
+            <TextView
+                android:id="@+id/cost_per"
+                android:text="0 %"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/holo_red_light"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_gravity="center"
+            android:padding="2dp"
+            >
+
+            <TextView
+                android:text="Savings Percentages: "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/back_ground_color"
+
+
+                />
+            <TextView
+                android:id="@+id/save_per"
+                android:text="0 %"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/back_ground_color"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_gravity="center"
+            android:padding="2dp"
+            >
+
+            <TextView
+                android:text="Cost-Savings(%) : "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/new_header_color"
+
+
+                />
+            <TextView
+                android:id="@+id/save_cost"
+                android:text="0 %"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/new_header_color"
+                />
+        </TableRow>
+        <TableRow
+            android:layout_gravity="center"
+            android:padding="2dp"
+            >
+
+            <TextView
+                android:text="Last Month Cost : "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/holo_purple"
+
+
+                />
+            <TextView
+                android:id="@+id/last_cost"
+                android:text="0 ৳"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/holo_purple"
+                />
+        </TableRow>
+    </TableLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <Button
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/perms_dangerous_grp_color"
+            android:text="+ Add"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="40dp"
+
+            />
+        <Button
+            android:id="@+id/dollar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/Teal"
+            android:text="Convert to $"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp">
+
+        <Button
+            android:id="@+id/profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:text="Update\nProfile"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:textStyle="bold"
+
+
+            />
+        <Button
+            android:id="@+id/cost_hist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/holo_red_light"
+            android:text="Cost\nHistory"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+
+            />
+        <Button
+            android:id="@+id/income_hist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/holo_green_light"
+            android:text="Income\nHistory"
+            android:textSize="15sp"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:textStyle="bold"
+
+            />
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/holo_orange_dark"
+            android:text="Logout"
+            android:textSize="15sp"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+
+            />
+    </LinearLayout>
+    <Button
+        android:id="@+id/upt_exp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Expenses"
+        android:layout_marginTop="10dp"
+        android:textSize="18dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/holo_purple"
+        />
+
+</LinearLayout>

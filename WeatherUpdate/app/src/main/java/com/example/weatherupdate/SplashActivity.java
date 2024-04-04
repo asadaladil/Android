@@ -29,9 +29,9 @@ public class SplashActivity extends AppCompatActivity {
     }
     public void doWork()
     {
-        for(int p=10;p<=100;p=p+10) {
+        for(int p=1;p<=100;p=p+1) {
             try {
-                Thread.sleep(500);
+                Thread.sleep(20);
                 final int pg = p;
                 runOnUiThread(new Runnable() {
                     @Override

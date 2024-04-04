@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.ClientError;
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -58,8 +60,20 @@ public class FindCityActivity2 extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                city.setText("");
-                Toast.makeText(FindCityActivity2.this, "Invalid City", Toast.LENGTH_SHORT).show();
+                if (error instanceof NoConnectionError)
+                {
+                    // Handle no connection error
+                    Toast.makeText(getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ClientError)
+                {
+                    // Handle invalid input error
+                    city.setText("");
+                    Toast.makeText(getApplicationContext(), "Invalid City Name", Toast.LENGTH_SHORT).show();
+                } else
+                {
+                    // Handle other errors
+                    Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         Volley.newRequestQueue(getApplicationContext()).add(request);

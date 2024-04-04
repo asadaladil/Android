@@ -31,10 +31,10 @@ public class SplashScreen extends AppCompatActivity {
     }
     public void doWork()
     {
-        for(int p=20;p<=100;p=p+20)
+        for(int p=1;p<=100;p=p+1)
         {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(20);
                 final int pg =p;
                 runOnUiThread(new Runnable() {
                     @Override

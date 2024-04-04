@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/main_back"
+    tools:context=".Update_Expense_Activity">
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        android:text="⬅️ Back"
+        android:textSize="18dp"
+        android:backgroundTint="@color/DimGray"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        >
+        <Button
+            android:id="@+id/tap_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Cost"
+            android:backgroundTint="@color/holo_red_light"
+            android:layout_marginRight="20dp"
+            />
+        <Button
+            android:id="@+id/tap_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Income"
+            android:layout_marginLeft="20dp"
+            android:backgroundTint="@color/holo_green_dark"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/L1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/section_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Section:   "
+            android:textStyle="bold"
+            android:visibility="invisible"
+            android:textColor="@color/holo_blue_dark"
+            />
+        <EditText
+            android:id="@+id/section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            android:hint="Enter The Name"
+            android:textColor="@color/black"
+            />
+        <Button
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:visibility="invisible"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
+            android:backgroundTint="@color/MediumSeaGreen"
+
+            />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="No data Found"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        android:typeface="serif"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
+    <Button
+        android:id="@+id/cng_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="Change Value"
+        android:textSize="15sp"
+        android:visibility="invisible"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/holo_orange_dark"
+        android:textStyle="bold"
+        />
+    <LinearLayout
+        android:id="@+id/L2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/amount_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            android:text="Amount:   "
+            android:textStyle="bold"
+            android:textColor="@color/holo_blue_dark"
+            />
+        <EditText
+            android:id="@+id/value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            android:inputType="number"
+            android:hint="Enter The Value"
+            android:textColor="@color/black"
+            />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/currency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="(Enter your amount in taka)"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        android:textColor="@color/holo_purple"
+        />
+    <Button
+        android:id="@+id/add_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Continue"
+        android:visibility="invisible"
+        android:textSize="18sp"
+        android:backgroundTint="@color/holo_blue_dark"
+        />
+
+</LinearLayout>

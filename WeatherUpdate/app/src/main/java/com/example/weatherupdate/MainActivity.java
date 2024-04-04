@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.ClientError;
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -129,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         condition.setText(k);
         if(k.equals("Rain"))
         {
-            ll.setBackgroundResource(R.drawable.raining_back2);
+            ll.setBackgroundResource(R.drawable.raining_back);
             iv.setImageDrawable(getDrawable(R.drawable.raining));
         }
         else if(k.equals("Snow"))
@@ -142,15 +144,28 @@ public class MainActivity extends AppCompatActivity {
             ll.setBackgroundResource(R.drawable.sunny_back);
             iv.setImageDrawable(getDrawable(R.drawable.sunny));
         }
-        else if(k.equals("Clouds"))
+        else if(k.equals("Clouds")||k.equals("Partly cloudy"))
         {
-            ll.setBackgroundResource(R.drawable.rain_cloudy_back);
+            ll.setBackgroundResource(R.drawable.cloudy_back);
             iv.setImageDrawable(getDrawable(R.drawable.cloudy));
         }
-        else if(k.equals("Storm"))
+        else if(k.equals("Storm")||k.equals("Thunderstorm"))
         {
-            ll.setBackgroundResource(R.drawable.stormy_back);
+            ll.setBackgroundResource(R.drawable.thunderstorm_back);
             iv.setImageDrawable(getDrawable(R.drawable.storm));
+        } else if (k.equals("Mist"))
+        {
+            ll.setBackgroundResource(R.drawable.mist_back);
+            iv.setImageDrawable(getDrawable(R.drawable.mist));
+        } else if (k.equals("Fog"))
+        {
+            ll.setBackgroundResource(R.drawable.fog_back);
+            iv.setImageDrawable(getDrawable(R.drawable.fogg));
+        }
+        else if (k.equals("Dust"))
+        {
+            ll.setBackgroundResource(R.drawable.dust_back);
+            iv.setImageDrawable(getDrawable(R.drawable.dust));
         }
     }
     public void setTemp()
@@ -200,14 +215,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error)
             {
-                Temp.setText("");
-                valueshow();
-                Toast.makeText(MainActivity.this,"Invalid City",Toast.LENGTH_SHORT).show();
+                if (error instanceof NoConnectionError)
+                {
+                    // Handle no connection error
+                    Toast.makeText(getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ClientError)
+                {
+                    // Handle invalid input error
+                    Temp.setText("");
+                    value_show();
+                    Toast.makeText(getApplicationContext(), "Invalid City Name", Toast.LENGTH_SHORT).show();
+                } else
+                {
+                    // Handle other errors
+                    Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         Volley.newRequestQueue(getApplicationContext()).add(request);
     }
-    public void valueshow()
+    public void value_show()
     {
         pressure.setText("");
         City.setText("");
