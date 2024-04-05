@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Stack;
 
@@ -50,12 +51,14 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
 
     private AlertDialog.Builder alert;
-    private TextView wel,balance,bochor,TB,TC,CP,SP,CS,LMC;
+    private TextView wel,balance,bochor,TB,TC,CP,SP,CS,month;
     private Button Add,profile,cost_hist,income_hist,logout,expense,doll;
-    private Map<String,Integer>cost_mp=new HashMap<>();
-    private Map<String,Integer>income_mp=new HashMap<>();
+    private Map<String,Integer>cost_mp=new LinkedHashMap<>();
+    private Map<String,Integer>income_mp=new LinkedHashMap<>();
     private int cost_int=0,income_int=0;
     private String sign=" ৳";
+    private Map<String,String>mont_inc=new HashMap<>();
+    private Map<String,String>mont_cost=new HashMap<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         CP=(TextView) findViewById(R.id.cost_per);
         SP=(TextView) findViewById(R.id.save_per);
         CS=(TextView) findViewById(R.id.save_cost);
-        LMC=(TextView) findViewById(R.id.last_cost);
 
         Add=(Button) findViewById(R.id.add);
         profile=(Button)findViewById(R.id.profile);
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         logout=(Button)findViewById(R.id.logout);
         expense=(Button)findViewById(R.id.upt_exp);
         doll=(Button)findViewById(R.id.dollar);
+        month=(Button)findViewById(R.id.month);
 
         //file_clear_koro();
         Add.setOnClickListener(new View.OnClickListener()
@@ -148,6 +151,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        month.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ki_hoeche_dekhao();
+            }
+        });
         if(bochor.getText().equals(""))
         {
             sal_lagao();
@@ -173,8 +182,6 @@ public class MainActivity extends AppCompatActivity {
             String line=br.readLine();
             bochor.setText(line);
             ip.close();
-        } catch (FileNotFoundException e) {
-            //Toast.makeText(MainActivity.this,"i am here",Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             //Toast.makeText(MainActivity.this,"i am here",Toast.LENGTH_SHORT).show();
         }
@@ -190,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
         {
             income_mp.put(k,income_mp.getOrDefault(k,0)+a);
         }
+        money_thik_koro(set,a);
         taka_lagao2();
 
     }
@@ -234,6 +242,7 @@ public class MainActivity extends AppCompatActivity {
             String line;
             int i=1;
             String k="";
+            income_int=0;
             while((line= br2.readLine())!=null)
             {
                 if(i%2==1)
@@ -243,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
                 else
                 {
                     income_mp.put(k,Integer.parseInt(line));
-                    income_int+=income_mp.get(k);
+                    income_int+=Integer.parseInt(line);
                 }
                 i++;
             }
@@ -252,20 +261,20 @@ public class MainActivity extends AppCompatActivity {
             InputStreamReader is3=new InputStreamReader(ip3);
             BufferedReader br3=new BufferedReader(is3);
             i=1;
-            k="";
-                while((line= br3.readLine())!=null)
+            cost_int=0;
+            while((line= br3.readLine())!=null)
+            {
+                if(i%2==1)
                 {
-                    if(i%2==1)
-                    {
-                        k=line;
-                    }
-                    else
-                    {
-                        cost_mp.put(k,Integer.parseInt(line));
-                        cost_int+=cost_mp.get(k);
-                    }
-                    i++;
+                    k=line;
                 }
+                else
+                {
+                    cost_mp.put(k,Integer.parseInt(line));
+                    cost_int+=Integer.parseInt(line);
+                }
+                i++;
+            }
             ip3.close();
             FileInputStream ip4=openFileInput("save_info.txt");
             InputStreamReader is4=new InputStreamReader(ip4);
@@ -277,9 +286,42 @@ public class MainActivity extends AppCompatActivity {
             }
             wel.setText("Welcome "+temp1.get(0));
             ip4.close();
+            ip4=openFileInput("monthly_income.txt");
+            is4=new InputStreamReader(ip4);
+            br4=new BufferedReader(is4);
+            i=1;
+            while((line= br4.readLine())!=null)
+            {
+                if(i%2==1)
+                {
+                    k=line;
+                }
+                else
+                {
+                    mont_inc.put(k,line);
+                }
+                i++;
+            }
+            ip4.close();
+            ip4=openFileInput("monthly_cost.txt");
+            is4=new InputStreamReader(ip4);
+            br4=new BufferedReader(is4);
+            i=1;
+            while((line= br4.readLine())!=null)
+            {
+                if(i%2==1)
+                {
+                    k=line;
+                }
+                else
+                {
+                    mont_cost.put(k,line);
+                }
+                i++;
+            }
+            ip4.close();
+            money_refresh();
             taka_lagao2();
-        } catch (FileNotFoundException e) {
-           // Toast.makeText(MainActivity.this,"i am here",Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             //Toast.makeText(MainActivity.this,"i am here",Toast.LENGTH_SHORT).show();
         }
@@ -290,28 +332,40 @@ public class MainActivity extends AppCompatActivity {
             FileOutputStream os1=openFileOutput("income_saves.txt",Context.MODE_PRIVATE);
             for( Map.Entry<String, Integer> entry:income_mp.entrySet())
             {
-
                     os1.write(entry.getKey().getBytes());
                     os1.write("\n".getBytes());
                     os1.write(entry.getValue().toString().getBytes());
                     os1.write("\n".getBytes());
-
             }
             os1.close();
             FileOutputStream os2=openFileOutput("cost_saves.txt",Context.MODE_PRIVATE);
             for( Map.Entry<String, Integer> entry:cost_mp.entrySet())
             {
-
                     os2.write(entry.getKey().getBytes());
                     os2.write("\n".getBytes());
                     os2.write(entry.getValue().toString().getBytes());
                     os2.write("\n".getBytes());
-
+            }
+            os2.close();
+            os2=openFileOutput("monthly_income.txt",Context.MODE_PRIVATE);
+            for( Map.Entry<String, String> entry:mont_inc.entrySet())
+            {
+                os2.write(entry.getKey().getBytes());
+                os2.write("\n".getBytes());
+                os2.write(entry.getValue().getBytes());
+                os2.write("\n".getBytes());
+            }
+            os2.close();
+            os2=openFileOutput("monthly_cost.txt",Context.MODE_PRIVATE);
+            for( Map.Entry<String, String> entry:mont_cost.entrySet())
+            {
+                os2.write(entry.getKey().getBytes());
+                os2.write("\n".getBytes());
+                os2.write(entry.getValue().getBytes());
+                os2.write("\n".getBytes());
             }
             os2.close();
             //Toast.makeText(MainActivity.this,"i am here also 3",Toast.LENGTH_SHORT).show();
-        } catch (FileNotFoundException e) {
-            //Toast.makeText(MainActivity.this,"i am here also",Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             //Toast.makeText(MainActivity.this,"i am here also",Toast.LENGTH_SHORT).show();
         }
@@ -325,8 +379,26 @@ public class MainActivity extends AppCompatActivity {
             os=openFileOutput("income_saves.txt",Context.MODE_PRIVATE);
             os.write("".getBytes());
             os.close();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            os=openFileOutput("monthly_income.txt",Context.MODE_PRIVATE);
+            os.write(maser_nam(ki_mas_eta()).getBytes());
+            os.write("\n".getBytes());
+            os.write("0".getBytes());
+            os.write("\n".getBytes());
+            os.write(maser_nam(ki_mas_eta()-1).getBytes());
+            os.write("\n".getBytes());
+            os.write("0".getBytes());
+            os.write("\n".getBytes());
+            os.close();
+            os=openFileOutput("monthly_cost.txt",Context.MODE_PRIVATE);
+            os.write(maser_nam(ki_mas_eta()).getBytes());
+            os.write("\n".getBytes());
+            os.write("0".getBytes());
+            os.write("\n".getBytes());
+            os.write(maser_nam(ki_mas_eta()-1).getBytes());
+            os.write("\n".getBytes());
+            os.write("0".getBytes());
+            os.write("\n".getBytes());
+            os.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -338,7 +410,7 @@ public class MainActivity extends AppCompatActivity {
         StringBuilder show= new StringBuilder();
         for(Map.Entry<String,Integer>mp:map.entrySet())
         {
-            show.append(mp.getKey()).append(" - ").append(mp.getValue().toString()).append("\n");
+            show.append(mp.getKey()).append(" -> ").append(mp.getValue().toString()).append("\n");
         }
         alert.setMessage(show.toString());
         alert.setCancelable(false);
@@ -365,11 +437,10 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     os = openFileOutput("temp_info.txt", Context.MODE_PRIVATE);
                     os.write("".getBytes());
+                    os.close();
                     Intent intent=new Intent(MainActivity.this,LoginActivity.class);
                     startActivity(intent);
                     finish();
-                } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -427,11 +498,105 @@ public class MainActivity extends AppCompatActivity {
         Volley.newRequestQueue(getApplicationContext()).add(request);
     }
 
-    public String ki_mas_eta()
+    public Integer ki_mas_eta()
     {
         LocalDateTime local=LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM");
-        String k=local.format(formatter);
-        return k;
+        return Integer.parseInt(local.format(formatter));
+    }
+    public String maser_nam(Integer xx)
+    {
+        Map<Integer,String>mas=new HashMap<>();
+        mas.put(0,"December");mas.put(1,"January");mas.put(2,"February");
+        mas.put(3,"March");mas.put(4,"April");mas.put(5,"May");
+        mas.put(6,"June");mas.put(7,"July");mas.put(8,"August");
+        mas.put(9,"September");mas.put(10,"October");mas.put(11,"November");
+        return mas.get(xx);
+    }
+    public void ki_hoeche_dekhao()
+    {
+        alert=new AlertDialog.Builder(MainActivity.this);
+        alert.setTitle("Monthly Info");
+        StringBuilder show= new StringBuilder();
+        show.append("\nMONTHLY INCOME:\n\n");
+        for(Map.Entry<String,String>mp:mont_inc.entrySet())
+        {
+            show.append(mp.getKey()).append(" -> ").append(mp.getValue()).append("\n");
+        }
+        show.append("\n\n\nMONTHLY COST:\n\n");
+        for(Map.Entry<String,String>mp:mont_cost.entrySet())
+        {
+            show.append(mp.getKey()).append(" -> ").append(mp.getValue()).append("\n");
+        }
+        alert.setMessage(show.toString());
+        alert.setCancelable(false);
+        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog ad=alert.create();
+        ad.show();
+    }
+    public void money_thik_koro(String set,int a)
+    {
+        String[] month=new String[2];
+        month[0]=maser_nam(ki_mas_eta()-1);
+        month[1]=maser_nam(ki_mas_eta());
+        if(set.equals("income"))
+        {
+            if(mont_inc.containsKey(month[1]))
+            {
+                int xx=Integer.parseInt(mont_inc.get(month[1]))+a;
+                mont_inc.put(month[1],String.valueOf(xx));
+            }
+            else
+            {
+                String k=mont_inc.get(month[0]);
+                mont_inc.clear();
+                mont_inc.put(month[0],k);
+                mont_inc.put(month[1],String.valueOf(a));
+
+            }
+        }
+        else if(set.equals("cost"))
+        {
+            if(mont_cost.containsKey(month[1]))
+            {
+                int xx=Integer.parseInt(mont_cost.get(month[1]))+a;
+                mont_cost.put(month[1],String.valueOf(xx));
+
+            }
+            else
+            {
+                String k=mont_cost.get(month[0]);
+                mont_cost.clear();
+                mont_cost.put(month[0],k);
+                mont_cost.put(month[1],String.valueOf(a));
+
+            }
+        }
+    }
+
+    public void money_refresh()
+    {
+        String[] month=new String[2];
+        month[0]=maser_nam(ki_mas_eta()-1);
+        month[1]=maser_nam(ki_mas_eta());
+        if(!mont_inc.containsKey(month[1]))
+        {
+            String k=mont_inc.get(month[0]);
+            mont_inc.clear();
+            mont_inc.put(month[0],k);
+            mont_inc.put(month[1],"0");
+        }
+        if(!mont_cost.containsKey(month[1]))
+        {
+            String k=mont_cost.get(month[0]);
+            mont_cost.clear();
+            mont_cost.put(month[0],k);
+            mont_cost.put(month[1],"0");
+        }
     }
 }
