@@ -83,23 +83,20 @@ public class MainActivity extends AppCompatActivity {
         doll=(Button)findViewById(R.id.dollar);
         month=(Button)findViewById(R.id.month);
 
-        //file_clear_koro();
-        Add.setOnClickListener(new View.OnClickListener()
-        {
+        Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,InfoActivity.class);
+                Intent intent = new Intent(MainActivity.this, InfoActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 save_koro();
-                Intent intent=new Intent(MainActivity.this, Personal_infoActivity.class);
-                intent.putExtra("year",bochor.getText().toString());
+                Intent intent = new Intent(MainActivity.this, Personal_infoActivity.class);
+                intent.putExtra("year", bochor.getText().toString());
                 //Toast.makeText(MainActivity.this,"problem",Toast.LENGTH_SHORT).show();
                 startActivity(intent);
                 finish();
@@ -108,15 +105,14 @@ public class MainActivity extends AppCompatActivity {
         });
         cost_hist.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                show_history("Cost Details: ",cost_mp);
+            public void onClick(View v) {
+                show_history("Cost Details: ", cost_mp);
             }
         });
         income_hist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                show_history("Income Details: ",income_mp);
+                show_history("Income Details: ", income_mp);
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         expense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,Update_Expense_Activity.class);
+                Intent intent = new Intent(MainActivity.this, Update_Expense_Activity.class);
                 startActivity(intent);
                 finish();
             }
@@ -136,16 +132,14 @@ public class MainActivity extends AppCompatActivity {
         doll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(doll.getText().toString().equals("Convert to $"))
-                {
+                if (doll.getText().toString().equals("Convert to $")) {
                     doll.setText("Convert to ৳");
                     Dollar_banao();
-                }
-                else
-                {
+                } else {
                     doll.setText("Convert to $");
-                    sign=" ৳";
-                    income_int=0;cost_int=0;
+                    sign = " ৳";
+                    income_int = 0;
+                    cost_int = 0;
                     file_khulo();
                 }
 
@@ -157,21 +151,25 @@ public class MainActivity extends AppCompatActivity {
                 ki_hoeche_dekhao();
             }
         });
-        if(bochor.getText().equals(""))
-        {
+        if (bochor.getText().equals("")) {
             sal_lagao();
         }
-        Bundle bundle2=getIntent().getExtras();
-        if(bundle2!=null)
-        {
-            String a=bundle2.getString("position");
-            String b=bundle2.getString("section");
-            String c=bundle2.getString("amount");
+        Bundle bundle2 = getIntent().getExtras();
+        if (bundle2 != null) {
+            String a = bundle2.getString("position");
+            String b = bundle2.getString("section");
+            String c = bundle2.getString("amount");
             //Toast.makeText(MainActivity.this,a,Toast.LENGTH_SHORT).show();
             file_khulo();
-            taka_lagao(a,b, Integer.parseInt(c));
+            taka_lagao(a, b, Integer.parseInt(c));
         }
-        file_khulo();
+        try {
+            file_khulo();
+        }
+        catch (Exception e)
+        {
+            file_clear_koro();
+        }
     }
     public void sal_lagao()
     {

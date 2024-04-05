@@ -52,8 +52,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         click=(TextView)findViewById(R.id.recover);
         OTP=(Button)findViewById(R.id.otp);
         Email=(EditText)findViewById(R.id.email);
-
-
         try {
 //            FileOutputStream os=openFileOutput("temp_info.txt",Context.MODE_PRIVATE);
 //            os.write("".getBytes());
@@ -69,7 +67,67 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             {
                 sb.add(line);
             }
-            br.close();
+            ip.close();
+            if(!sb.isEmpty())
+            {
+                next_page();
+            }
+            else
+            {
+                login.setVisibility(View.VISIBLE);
+                submit.setOnClickListener(this);
+                cancel.setOnClickListener(this);
+                click.setOnClickListener(this);
+            }
+        } catch (IOException e) {
+            //Toast.makeText(LoginActivity.this,"No Data Found",Toast.LENGTH_SHORT).show();
+            FileOutputStream os= null;
+            try {
+                os = openFileOutput("temp_info.txt", Context.MODE_PRIVATE);
+                os.write("".getBytes());
+                FileOutputStream os1=openFileOutput("save_info.txt",Context.MODE_PRIVATE);
+                os1.write("".getBytes());
+                FileOutputStream os2=openFileOutput("email.txt",Context.MODE_PRIVATE);
+                os2.write("".getBytes());
+                os2=openFileOutput("year.txt",Context.MODE_PRIVATE);
+                os2.write("".getBytes());
+                os2=openFileOutput("income_saves.txt",Context.MODE_PRIVATE);
+                os2.write("".getBytes());
+                os2=openFileOutput("cost_saves.txt",Context.MODE_PRIVATE);
+                os2.write("".getBytes());
+                os2=openFileOutput("monthly_income.txt",Context.MODE_PRIVATE);
+                os2.write("".getBytes());
+                os2=openFileOutput("monthly_cost.txt",Context.MODE_PRIVATE);
+                os2.write("".getBytes());
+                somossa_tai_ekhane();
+            } catch (IOException ex) {
+                Toast.makeText(LoginActivity.this,"No Data Found",Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    public void next_page()
+    {
+
+        Intent intent=new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_LONG).show();
+        finish();
+    }
+    public void somossa_tai_ekhane()
+    {
+        FileInputStream ip= null;
+        try {
+            ip = openFileInput("temp_info.txt");
+            InputStreamReader is=new InputStreamReader(ip);
+            BufferedReader br=new BufferedReader(is);
+            String line;
+            while((line=br.readLine())!=null)
+            {
+                sb.add(line);
+            }
+            ip.close();
             if(!sb.isEmpty())
             {
                 next_page();
@@ -86,16 +144,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
     }
-
-    public void next_page()
-    {
-
-        Intent intent=new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
-        Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_LONG).show();
-        finish();
-    }
-
     @Override
     public void onClick(View v)
     {
