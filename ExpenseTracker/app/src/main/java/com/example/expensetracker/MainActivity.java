@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private Button Add,profile,cost_hist,income_hist,logout,expense,doll;
     private Map<String,Integer>cost_mp=new LinkedHashMap<>();
     private Map<String,Integer>income_mp=new LinkedHashMap<>();
-    private int cost_int=0,income_int=0;
+    private long cost_int=0,income_int=0;
     private String sign=" ৳";
     private Map<String,String>mont_inc=new HashMap<>();
     private Map<String,String>mont_cost=new HashMap<>();
@@ -201,13 +201,46 @@ public class MainActivity extends AppCompatActivity {
     }
     public void taka_lagao2()
     {
+        Map<String,Integer>amount=new HashMap<>();
+        amount.put("B",1000000000);
+        amount.put("M",1000000);
+        amount.put("K",1000);
+        long x=income_int-cost_int;
         //Toast.makeText(MainActivity.this,"i am here also",Toast.LENGTH_SHORT).show();
-        String k= String.valueOf(cost_int) +sign;
-        TC.setText(k);
-        k= String.valueOf(income_int) +sign;
-        TB.setText(k);
-        int x=income_int-cost_int;
-        k= String.valueOf(x)+sign;
+        String extra_in=money_besi_kina(income_int),extra_co=money_besi_kina(cost_int);
+        if (!extra_co.isEmpty())
+        {
+            long temp=amount.get(extra_co);
+            if(cost_int%temp==0)
+            {
+                String k= String.valueOf(cost_int/temp) +extra_co+sign;
+                TC.setText(k);
+            }
+            else
+            {
+                double COST=income_int;
+                COST/=temp;
+                String k= String.valueOf(String.format("%.2f",COST)) +extra_co+sign;
+                TC.setText(k);
+            }
+        }
+        if (!extra_in.isEmpty())
+        {
+            long temp=amount.get(extra_in);
+            if(income_int%temp==0)
+            {
+                String k= String.valueOf(income_int/temp) +extra_in+sign;
+                TB.setText(k);
+            }
+            else
+            {
+                double INC=income_int;
+                INC/=temp;
+                String k= String.valueOf(String.format("%.2f",INC)) +extra_in+sign;
+                TB.setText(k);
+            }
+        }
+        String k= String.valueOf(x)+sign;
         balance.setText(k);
         set_extra();
     }
@@ -469,12 +502,15 @@ public class MainActivity extends AppCompatActivity {
                             sign=" $";
                             double format=((double)cost_int/val);
                             cost_int=(int)Math.round(format);
+                            TC.setText(String.valueOf(cost_int)+sign);
                             format=((double)income_int/val);
                             income_int=(int)Math.round(format);
+                            TB.setText(String.valueOf(income_int)+sign);
                             taka_lagao2();
 
                         } catch (JSONException e) {
                             Toast.makeText(MainActivity.this,"Error Occur",Toast.LENGTH_SHORT).show();
+                            doll.setText("Convert to $");
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -484,12 +520,14 @@ public class MainActivity extends AppCompatActivity {
                 if (error instanceof NoConnectionError)
                 {
                     // Handle no connection error
-                    Toast.makeText(getApplicationContext(), "Check your internet connection", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+                    doll.setText("Convert to $");
                 }
                 else
                 {
                     // Handle other errors
                     Toast.makeText(getApplicationContext(), "An error occurred", Toast.LENGTH_SHORT).show();
+                    doll.setText("Convert to $");
                 }
             }
         });
@@ -596,5 +634,12 @@ public class MainActivity extends AppCompatActivity {
             mont_cost.put(month[0],k);
             mont_cost.put(month[1],"0");
         }
+    }
+    public String money_besi_kina(long money)
+    {
+        if(money>=1e9){return "B";}
+        else if(money>=1e6){return "M";}
+        else if(money>=1e5){return "K";}
+        else{return "";}
     }
 }

@@ -102,7 +102,11 @@ public class Personal_infoActivity extends AppCompatActivity {
                 {
                     String pass1=new_pass.getText().toString();
                     String pass2=sure_pass.getText().toString();
-                    if(pass2.equals(pass1))
+                    if(pass2.isEmpty())
+                    {
+                        Toast.makeText(Personal_infoActivity.this,"Invalid Password",Toast.LENGTH_SHORT).show();
+                    }
+                    else if(pass2.equals(pass1))
                     {
                         cur_pass.setText(pass1);
                         save_koro();
@@ -178,10 +182,8 @@ public class Personal_infoActivity extends AppCompatActivity {
             os.close();
             Toast.makeText(Personal_infoActivity.this,"Value Updated Successfully",Toast.LENGTH_SHORT).show();
             next_page();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Toast.makeText(Personal_infoActivity.this,"Something went wrong",Toast.LENGTH_SHORT).show();
         }
     }
 

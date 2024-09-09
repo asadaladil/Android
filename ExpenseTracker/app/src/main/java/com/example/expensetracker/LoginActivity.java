@@ -27,7 +27,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Random;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     EditText user_name,pass_word,Email;
     Button cancel,submit,OTP;
     TextView click;
-    String User,Pass;
+    String User,Pass,get_user,get_pass,get_email;
     private AlertDialog.Builder alert;
     ArrayList<String>sb=new ArrayList<>();
     @Override
@@ -187,23 +197,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Intent intent = new Intent(LoginActivity.this, EmailActivity.class);
                         startActivity(intent);
                         finish();
-                    } catch (FileNotFoundException e) {
-                        Toast.makeText(LoginActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         Toast.makeText(LoginActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
                     }
                     ip.close();
                 }
                 else {
-                    String get_user = setto.get(0);
-                    String get_pass = setto.get(1);
+                    get_user = setto.get(0);
+                    get_pass = setto.get(1);
                     if (get_user.equals(User) && get_pass.equals(Pass)) {
                         FileOutputStream op2 = openFileOutput("temp_info.txt", Context.MODE_PRIVATE);
                         op2.write(get_user.getBytes());
                         op2.write(get_pass.getBytes());
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
+                        next_page();
                     }
                     else {
                         alert = new AlertDialog.Builder(LoginActivity.this);
@@ -244,7 +250,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     sb.add(line);
                 }
                 br.close();
-                if(sb.size()!=0)
+                if(!sb.isEmpty())
                 {
                     Email.setText("");
                     Email.setHint("Enter Your Email");
@@ -257,7 +263,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         public void onClick(View v)
                         {
                             String email=sb.get(0);
-                            String get_email=Email.getText().toString();
+                            get_email=Email.getText().toString();
                             if(email.equals(get_email))
                             {
                                 alert=new AlertDialog.Builder(LoginActivity.this);
@@ -332,4 +338,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         int rand=min+random.nextInt(max-min);
         return Integer.toString(rand);
     }
+
 }
